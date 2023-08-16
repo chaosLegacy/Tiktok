@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "tiktok66b6b02e": {}
+      },
+      "api": {
+        "tiktok": {}
       }
     }
   }
