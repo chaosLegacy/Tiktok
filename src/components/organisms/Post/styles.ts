@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: Layout.window.width,
-    height: Layout.window.height - 24,
+    height: Layout.window.height - Layout.TAB_OFFSET,
   },
 });
 

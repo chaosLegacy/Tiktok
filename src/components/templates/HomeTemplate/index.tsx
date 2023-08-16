@@ -18,7 +18,7 @@ const HomeTemplate = () => {
         renderItem={({ item }) => <Post item={item} />}
         estimatedItemSize={10}
         showsVerticalScrollIndicator={false}
-        snapToInterval={layout.window.height - 24}
+        snapToInterval={layout.window.height - layout.TAB_OFFSET}
         snapToAlignment="start"
         decelerationRate="fast"
       />
