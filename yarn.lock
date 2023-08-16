@@ -2263,6 +2263,11 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
+"@svanboxel/visibility-sensor-react-native@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@svanboxel/visibility-sensor-react-native/-/visibility-sensor-react-native-1.0.2.tgz#7174f33c6abb4e1472ec29f1b559c5162c022fc7"
+  integrity sha512-UH9EyC2VeOrC6M4tleR0/NgbEBK3sLvTGgq3veGFjLPstGl5grHPxfWXTdSwf4wMbo8UNYRIwEiC1JcItO3wVQ==
+
 "@tootallnate/once@2":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"

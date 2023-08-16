@@ -28,6 +28,7 @@
     "@react-navigation/material-top-tabs": "^6.6.3",
     "@react-navigation/native": "^6.0.2",
     "@shopify/flash-list": "^1.5.0",
+    "@svanboxel/visibility-sensor-react-native": "^1.0.2",
     "expo": "~49.0.7",
     "expo-av": "~13.4.1",
     "expo-font": "~11.4.0",
