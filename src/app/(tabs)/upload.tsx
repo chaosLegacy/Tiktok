@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
+import EditScreenInfo from '@/components/organisms/EditScreenInfo';
 import { Text, View } from '@/components/templates/Themed';
 
 export default function UploadScreen() {

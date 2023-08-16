@@ -1,34 +1,25 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { ExternalLink } from './atoms/ExternalLink';
-import { Text, View } from './templates/Themed';
-import { MonoText } from './StyledText';
-
-import Colors from '@/constants/Colors';
+import { ExternalLink } from '@/components/atoms/ExternalLink';
+import { Text } from '@/components/atoms/Text';
+import { MonoText } from '@/components/molecules/StyledText';
+import { View } from '@/components/templates/Themed';
 
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
     <View>
       <View style={styles.getStartedContainer}>
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
+        <Text style={styles.getStartedText}>
           Open up the code for this screen:
         </Text>
 
         <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
+          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
           <MonoText>{path}</MonoText>
         </View>
 
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
+        <Text style={styles.getStartedText}>
           Change any of the text, save the file, and your app will automatically
           update.
         </Text>
@@ -38,9 +29,7 @@ export default function EditScreenInfo({ path }: { path: string }) {
         <ExternalLink
           style={styles.helpLink}
           href="https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet">
-          <Text
-            style={styles.helpLinkText}
-            lightColor={Colors.light.primary.tint}>
+          <Text style={styles.helpLinkText}>
             Tap here if your app doesn&apos;t automatically update after making
             changes
           </Text>
