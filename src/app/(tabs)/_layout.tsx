@@ -1,6 +1,11 @@
-import { useColorScheme } from 'react-native';
+import { Image, useColorScheme } from 'react-native';
 
-import { AntDesign, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import {
+  AntDesign,
+  Entypo,
+  FontAwesome,
+  MaterialCommunityIcons,
+} from '@expo/vector-icons';
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabNavigationOptions,
@@ -33,7 +38,13 @@ export default function TabLayout() {
       tabBarPosition="bottom"
       screenOptions={{
         tabBarIndicatorStyle: { opacity: 0 },
-        tabBarLabelStyle: { textTransform: 'capitalize', fontSize: 12 },
+        tabBarLabelStyle: {
+          textTransform: 'capitalize',
+          fontSize: 10,
+          lineHeight: 10,
+          margin: 0,
+        },
+        tabBarContentContainerStyle: { height: 50 },
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].primary.tint,
       }}>
       <MaterialBottomTabs.Screen
@@ -41,31 +52,56 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => (
-            <AntDesign name="home" size={24} color={color} />
+            <Entypo name="home" size={20} color={color} />
           ),
-          // headerRight: () => (
-          //   <Link href="/modal" asChild>
-          //     <Pressable>
-          //       {({ pressed }) => (
-          //         <FontAwesome
-          //           name="info-circle"
-          //           size={25}
-          //           color={Colors[colorScheme ?? 'light'].primary.text}
-          //           style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-          //         />
-          //       )}
-          //     </Pressable>
-          //   </Link>
-          // ),
         }}
       />
       <MaterialBottomTabs.Screen
-        name="two"
+        name="search"
         options={{
-          title: 'Coming Soon',
-          // tabBarBadge: '1',
+          title: 'Search',
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="video-library" size={24} color={color} />
+            <AntDesign name="search1" size={20} color={color} />
+          ),
+        }}
+      />
+      <MaterialBottomTabs.Screen
+        name="upload"
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require('assets/images/upload-icon.png')}
+              style={{
+                width: 45,
+                height: 35,
+                resizeMode: 'contain',
+                alignSelf: 'center',
+                marginTop: -4,
+              }}
+            />
+          ),
+        }}
+      />
+      <MaterialBottomTabs.Screen
+        name="inbox"
+        options={{
+          title: 'Inbox',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="message-minus-outline"
+              size={20}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <MaterialBottomTabs.Screen
+        name="profile"
+        options={{
+          title: 'Me',
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="user" size={20} color={color} />
           ),
         }}
       />

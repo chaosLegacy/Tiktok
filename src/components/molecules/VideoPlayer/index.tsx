@@ -1,29 +1,24 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
 
 import { AVPlaybackStatus, ResizeMode, Video } from 'expo-av';
-import { Skeleton } from 'moti/skeleton';
 
 import styles from './styles';
 
-import { useGetStorage } from '@/hooks/useStorage';
-import { LazyEpisode } from '@/models';
-
 type VideoPlayerProps = {
-  episode: LazyEpisode;
+  videoUrl: string;
   videoRef: React.RefObject<Video>;
   videoStatus: [
     AVPlaybackStatus | undefined,
     React.Dispatch<React.SetStateAction<AVPlaybackStatus | undefined>>,
   ];
 };
-const VideoPlayer = ({ episode, videoRef, videoStatus }: VideoPlayerProps) => {
+const VideoPlayer = ({ videoUrl, videoRef, videoStatus }: VideoPlayerProps) => {
   const [status, setStatus] = videoStatus;
-  const { data: posterUrl } = useGetStorage(episode.poster, episode);
-  const { data: videoUrl, loading: loadingVideo } = useGetStorage(
-    episode.video,
-    episode,
-  );
+  // const { data: posterUrl } = useGetStorage(episode.poster, episode);
+  // const { data: videoUrl, loading: loadingVideo } = useGetStorage(
+  //   episode.video,
+  //   episode,
+  // );
 
   useEffect(() => {
     if (!videoUrl) {
@@ -37,31 +32,33 @@ const VideoPlayer = ({ episode, videoRef, videoStatus }: VideoPlayerProps) => {
     () => videoRef.current?.unloadAsync();
   }, [videoUrl]);
   return (
-    <View style={styles.container}>
-      <Skeleton show={loadingVideo}>
-        {videoUrl ? (
-          <Video
-            ref={videoRef}
-            style={styles.video}
-            source={{
-              uri: videoUrl,
-            }}
-            posterSource={{
-              uri: posterUrl,
-            }}
-            posterStyle={{
-              resizeMode: ResizeMode.COVER,
-            }}
-            usePoster={
-              !status?.isLoaded || !status.isPlaying || status.didJustFinish
-            }
-            useNativeControls
-            resizeMode={ResizeMode.CONTAIN}
-            onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-          />
-        ) : null}
-      </Skeleton>
-    </View>
+    <>
+      {/* <Skeleton show={loadingVideo}> */}
+      {videoUrl ? (
+        <Video
+          ref={videoRef}
+          style={styles.video}
+          source={{
+            uri: videoUrl,
+          }}
+          // posterSource={{
+          //   uri: posterUrl,
+          // }}
+          // posterStyle={{
+          //   resizeMode: ResizeMode.COVER,
+          // }}
+          // usePoster={
+          //   !status?.isLoaded || !status.isPlaying || status.didJustFinish
+          // }
+          isMuted
+          isLooping
+          useNativeControls={false}
+          resizeMode={ResizeMode.COVER}
+          onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+        />
+      ) : null}
+      {/* </Skeleton> */}
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleProp, TextStyle, useColorScheme } from 'react-native';
 
-import { Text as TextNative } from '@/components/molecules/Themed';
+import { Text as TextNative } from '@/components/templates/Themed';
 import Colors from '@/constants/Colors';
 
 export type FontWeightProps =
