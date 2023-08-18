@@ -34,7 +34,7 @@
     "@svanboxel/visibility-sensor-react-native": "^1.0.2",
     "amazon-cognito-identity-js": "^6.3.2",
     "aws-amplify": "^5.3.7",
-    "aws-sdk": "^2.1437.0",
+    "aws-sdk": "^2.1420.0",
     "expo": "~49.0.7",
     "expo-av": "~13.4.1",
     "expo-font": "~11.4.0",

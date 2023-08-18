@@ -10,11 +10,11 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import styles from './styles';
 
+import { Post } from '@/API';
 import Container from '@/components/atoms/Container';
 import { Text } from '@/components/atoms/Text';
 import { View } from '@/components/templates/Themed';
 import Colors from '@/constants/Colors';
-import { Post } from '@/types';
 
 const spinValue = new Animated.Value(0);
 Animated.loop(
@@ -30,7 +30,7 @@ type VideoDescriptionProps = {
   item: Post;
 };
 
-const VideoDescription = ({ item }: VideoDescriptionProps) => {
+const VideoDescription = ({ item: post }: VideoDescriptionProps) => {
   const theme = useColorScheme() ?? 'light';
   // Next, interpolate beginning and end values (in this case 0 and 1)
   const spin = spinValue.interpolate({
@@ -46,21 +46,25 @@ const VideoDescription = ({ item }: VideoDescriptionProps) => {
             @chaosLegacy
           </Text>
           <Text style={styles.postContent} color="secondary">
-            {item.description}
+            {post.description}
           </Text>
-          <View style={[styles.rowContainer, styles.transparent]}>
-            <FontAwesome
-              name="music"
-              size={14}
-              color={Colors[theme].primary.text}
-            />
-            <Text fontSize="sm">{item.song.name}</Text>
-          </View>
+          {post.song && (
+            <View style={[styles.textRowContainer, styles.transparent]}>
+              <FontAwesome
+                name="music"
+                size={14}
+                color={Colors[theme].primary.text}
+                style={{ paddingRight: 10 }}
+              />
+              <Text fontSize="sm">{post.song.artist} - </Text>
+              <Text fontSize="sm">{post.song.name}</Text>
+            </View>
+          )}
         </View>
         <TouchableOpacity>
           <Animated.Image
             source={{
-              uri: item.song.image,
+              uri: post.song?.coverUri,
             }}
             style={[styles.profilePicture, { transform: [{ rotate: spin }] }]}
           />

@@ -1,4 +1,6 @@
 amplify-codegen-temp/models
+amplify/
+src/types/aws-amplify-react-native.d.ts
 src/models/
 src/services/
 .prettierrc

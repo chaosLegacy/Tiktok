@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "tiktok66b6b02e_identitypool_66b6b02e",
+    "identityPoolName": "tiktok2e24242d_identitypool_2e24242d",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "tiktok66b6b02e",
-    "userPoolName": "tiktok66b6b02e_userpool_66b6b02e",
+    "resourceNameTruncated": "tiktok2e24242d",
+    "userPoolName": "tiktok2e24242d_userpool_2e24242d",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,12 +31,21 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "tiktok66b6b02e_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "tiktok2e24242d_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "66b6b02e",
-    "resourceName": "tiktok66b6b02e",
+    "sharedId": "2e24242d",
+    "resourceName": "tiktok2e24242d2e24242d",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
+    "useDefault": "manual",
+    "thirdPartyAuth": false,
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": {
+      "PostConfirmation": [
+        "custom"
+      ]
+    },
+    "hostedUI": false,
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

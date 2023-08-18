@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, TouchableOpacity, useColorScheme, View } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -6,27 +6,52 @@ import millify from 'millify';
 
 import styles from './styles';
 
+import { Post } from '@/API';
 import Container from '@/components/atoms/Container';
 import { Text } from '@/components/atoms/Text';
 import Colors from '@/constants/Colors';
-import { Post } from '@/types';
+import {
+  useCreateLike,
+  useDeleteLike,
+  useGetLikesByPostID,
+} from '@/hooks/useLike';
+import { useGetAuthenticatedUser } from '@/hooks/useUser';
 
 type VideoInteractionProps = {
   item: Post;
 };
 
-const VideoInteraction = ({ item }: VideoInteractionProps) => {
+const VideoInteraction = ({ item: post }: VideoInteractionProps) => {
   const theme = useColorScheme() ?? 'light';
+  const { data: likes } = useGetLikesByPostID(post.id);
+  const { data: authenticatedUser } = useGetAuthenticatedUser();
+  const [likesCount, setLikesCount] = useState<number>(0);
+  const [commentsCount, setCommentsCount] = useState<number>(0);
+  const [sharesCount, setSharesCount] = useState<number>(0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [post, setPost] = useState<Post>(item);
+
+  useEffect(() => {
+    if (likes?.likesByPostID?.items.length) {
+      setIsLiked(
+        likes.likesByPostID.items.findIndex(
+          (item) => item?.userID === authenticatedUser?.attributes.sub,
+        ) !== 1,
+      );
+      setLikesCount(likes.likesByPostID?.scannedCount || 0);
+    }
+  }, [likes]);
+
+  const { _mutateCreateLike, data: like } = useCreateLike(post.userID, post.id);
+  const { _mutateDeleteLike } = useDeleteLike();
+
   const onPressLike = () => {
-    isLiked ? -1 : 1;
-    setPost({
-      ...item,
-      likesCount: item.likesCount + 1,
-    });
+    !isLiked ? _mutateCreateLike() : _mutateDeleteLike(like?.id);
     setIsLiked(!isLiked);
+    setLikesCount(
+      !isLiked ? likesCount + 1 : likesCount <= 0 ? 0 : likesCount - 1,
+    );
   };
+
   return (
     <Container style={[styles.container, styles.transparent]}>
       <View>
@@ -45,7 +70,7 @@ const VideoInteraction = ({ item }: VideoInteractionProps) => {
             color={isLiked ? 'red' : Colors[theme].primary.text}
           />
           <Text color="secondary" fontSize="sm" style={styles.buttonText}>
-            {millify(post.likesCount)}
+            {millify(likesCount)}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonContainer}>
@@ -55,7 +80,7 @@ const VideoInteraction = ({ item }: VideoInteractionProps) => {
             color={Colors[theme].primary.text}
           />
           <Text color="secondary" fontSize="sm" style={styles.buttonText}>
-            {millify(post.commentCount)}
+            {millify(commentsCount)}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonContainer}>
@@ -65,7 +90,7 @@ const VideoInteraction = ({ item }: VideoInteractionProps) => {
             color={Colors[theme].primary.text}
           />
           <Text color="secondary" fontSize="sm" style={styles.buttonText}>
-            {millify(post.sharesCount)}
+            {millify(sharesCount)}
           </Text>
         </TouchableOpacity>
       </View>

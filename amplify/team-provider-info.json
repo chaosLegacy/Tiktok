@@ -1,19 +1,26 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-tiktok-dev-173700-authRole",
-      "UnauthRoleArn": "arn:aws:iam::895062317674:role/amplify-tiktok-dev-173700-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::895062317674:role/amplify-tiktok-dev-173700-authRole",
+      "AuthRoleName": "amplify-tiktok-dev-130716-authRole",
+      "UnauthRoleArn": "arn:aws:iam::895062317674:role/amplify-tiktok-dev-130716-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::895062317674:role/amplify-tiktok-dev-130716-authRole",
       "Region": "eu-north-1",
-      "DeploymentBucketName": "amplify-tiktok-dev-173700-deployment",
-      "UnauthRoleName": "amplify-tiktok-dev-173700-unauthRole",
-      "StackName": "amplify-tiktok-dev-173700",
-      "StackId": "arn:aws:cloudformation:eu-north-1:895062317674:stack/amplify-tiktok-dev-173700/cdf55d40-3c4a-11ee-84f3-0a8e4a069cf0",
-      "AmplifyAppId": "d276mdeyw0j4h8"
+      "DeploymentBucketName": "amplify-tiktok-dev-130716-deployment",
+      "UnauthRoleName": "amplify-tiktok-dev-130716-unauthRole",
+      "StackName": "amplify-tiktok-dev-130716",
+      "StackId": "arn:aws:cloudformation:eu-north-1:895062317674:stack/amplify-tiktok-dev-130716/3a8fce10-3cee-11ee-a1cc-0621b4b35102",
+      "AmplifyAppId": "d28hla846ubwzm",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-tiktok-dev-130716-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
-        "tiktok66b6b02e": {}
+        "tiktok2e24242d2e24242d": {}
+      },
+      "function": {
+        "tiktok2e24242d2e24242dPostConfirmation": {
+          "deploymentBucketName": "amplify-tiktok-dev-130716-deployment",
+          "s3Key": "amplify-builds/tiktok2e24242d2e24242dPostConfirmation-496b4963424557464835-build.zip"
+        }
       },
       "api": {
         "tiktok": {}

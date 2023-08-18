@@ -7,16 +7,20 @@
             "UserPoolId"
           ],
           "category": "auth",
-          "resourceName": "tiktok66b6b02e"
+          "resourceName": "tiktok2e24242d2e24242d"
         }
       ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authtiktok66b6b02e"
+              "userPoolId": "authtiktok2e24242d2e24242d"
             }
           }
         }
@@ -26,9 +30,19 @@
     }
   },
   "auth": {
-    "tiktok66b6b02e": {
+    "tiktok2e24242d2e24242d": {
       "customAuth": false,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "tiktok2e24242d2e24242dPostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
         "mfaTypes": [
@@ -49,6 +63,31 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "tiktok2e24242d2e24242dPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_tiktok2e24242d2e24242dPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tiktok2e24242d2e24242dPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_tiktok2e24242d2e24242dPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tiktok2e24242d2e24242dPostConfirmation"
+        }
+      ]
     }
   }
 }

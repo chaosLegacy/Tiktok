@@ -7,7 +7,7 @@ export const onCreateUser = /* GraphQL */ `
     onCreateUser(filter: $filter) {
       id
       name
-      userName
+      username
       email
       avatar
       posts {
@@ -16,12 +16,14 @@ export const onCreateUser = /* GraphQL */ `
           videoUri
           description
           userID
+          songID
           createdAt
           updatedAt
-          postSongId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       createdAt
@@ -35,7 +37,7 @@ export const onUpdateUser = /* GraphQL */ `
     onUpdateUser(filter: $filter) {
       id
       name
-      userName
+      username
       email
       avatar
       posts {
@@ -44,12 +46,14 @@ export const onUpdateUser = /* GraphQL */ `
           videoUri
           description
           userID
+          songID
           createdAt
           updatedAt
-          postSongId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       createdAt
@@ -63,7 +67,7 @@ export const onDeleteUser = /* GraphQL */ `
     onDeleteUser(filter: $filter) {
       id
       name
-      userName
+      username
       email
       avatar
       posts {
@@ -72,12 +76,14 @@ export const onDeleteUser = /* GraphQL */ `
           videoUri
           description
           userID
+          songID
           createdAt
           updatedAt
-          postSongId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       createdAt
@@ -93,37 +99,51 @@ export const onCreatePost = /* GraphQL */ `
       videoUri
       description
       userID
+      user {
+        id
+        name
+        username
+        email
+        avatar
+        posts {
+          nextToken
+          scannedCount
+          count
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      songID
       song {
         id
         artist
         name
         coverUri
         audioUri
-        post {
-          id
-          videoUri
-          description
-          userID
-          createdAt
-          updatedAt
-          postSongId
+        posts {
+          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
-        songPostId
         __typename
       }
       likes {
         items {
           id
           postID
+          userID
           createdAt
           updatedAt
-          likeUserId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       comments {
@@ -131,12 +151,14 @@ export const onCreatePost = /* GraphQL */ `
           id
           content
           postID
+          userID
           createdAt
           updatedAt
-          commentUserId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       shares {
@@ -144,17 +166,18 @@ export const onCreatePost = /* GraphQL */ `
           id
           social
           postID
+          userID
           createdAt
           updatedAt
-          shareUserId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       createdAt
       updatedAt
-      postSongId
       __typename
     }
   }
@@ -166,37 +189,51 @@ export const onUpdatePost = /* GraphQL */ `
       videoUri
       description
       userID
+      user {
+        id
+        name
+        username
+        email
+        avatar
+        posts {
+          nextToken
+          scannedCount
+          count
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      songID
       song {
         id
         artist
         name
         coverUri
         audioUri
-        post {
-          id
-          videoUri
-          description
-          userID
-          createdAt
-          updatedAt
-          postSongId
+        posts {
+          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
-        songPostId
         __typename
       }
       likes {
         items {
           id
           postID
+          userID
           createdAt
           updatedAt
-          likeUserId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       comments {
@@ -204,12 +241,14 @@ export const onUpdatePost = /* GraphQL */ `
           id
           content
           postID
+          userID
           createdAt
           updatedAt
-          commentUserId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       shares {
@@ -217,17 +256,18 @@ export const onUpdatePost = /* GraphQL */ `
           id
           social
           postID
+          userID
           createdAt
           updatedAt
-          shareUserId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       createdAt
       updatedAt
-      postSongId
       __typename
     }
   }
@@ -239,37 +279,51 @@ export const onDeletePost = /* GraphQL */ `
       videoUri
       description
       userID
+      user {
+        id
+        name
+        username
+        email
+        avatar
+        posts {
+          nextToken
+          scannedCount
+          count
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      songID
       song {
         id
         artist
         name
         coverUri
         audioUri
-        post {
-          id
-          videoUri
-          description
-          userID
-          createdAt
-          updatedAt
-          postSongId
+        posts {
+          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
-        songPostId
         __typename
       }
       likes {
         items {
           id
           postID
+          userID
           createdAt
           updatedAt
-          likeUserId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       comments {
@@ -277,12 +331,14 @@ export const onDeletePost = /* GraphQL */ `
           id
           content
           postID
+          userID
           createdAt
           updatedAt
-          commentUserId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       shares {
@@ -290,17 +346,18 @@ export const onDeletePost = /* GraphQL */ `
           id
           social
           postID
+          userID
           createdAt
           updatedAt
-          shareUserId
           __typename
         }
         nextToken
+        scannedCount
+        count
         __typename
       }
       createdAt
       updatedAt
-      postSongId
       __typename
     }
   }
@@ -313,42 +370,24 @@ export const onCreateSong = /* GraphQL */ `
       name
       coverUri
       audioUri
-      post {
-        id
-        videoUri
-        description
-        userID
-        song {
+      posts {
+        items {
           id
-          artist
-          name
-          coverUri
-          audioUri
+          videoUri
+          description
+          userID
+          songID
           createdAt
           updatedAt
-          songPostId
           __typename
         }
-        likes {
-          nextToken
-          __typename
-        }
-        comments {
-          nextToken
-          __typename
-        }
-        shares {
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
+        nextToken
+        scannedCount
+        count
         __typename
       }
       createdAt
       updatedAt
-      songPostId
       __typename
     }
   }
@@ -361,42 +400,24 @@ export const onUpdateSong = /* GraphQL */ `
       name
       coverUri
       audioUri
-      post {
-        id
-        videoUri
-        description
-        userID
-        song {
+      posts {
+        items {
           id
-          artist
-          name
-          coverUri
-          audioUri
+          videoUri
+          description
+          userID
+          songID
           createdAt
           updatedAt
-          songPostId
           __typename
         }
-        likes {
-          nextToken
-          __typename
-        }
-        comments {
-          nextToken
-          __typename
-        }
-        shares {
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
+        nextToken
+        scannedCount
+        count
         __typename
       }
       createdAt
       updatedAt
-      songPostId
       __typename
     }
   }
@@ -409,42 +430,24 @@ export const onDeleteSong = /* GraphQL */ `
       name
       coverUri
       audioUri
-      post {
-        id
-        videoUri
-        description
-        userID
-        song {
+      posts {
+        items {
           id
-          artist
-          name
-          coverUri
-          audioUri
+          videoUri
+          description
+          userID
+          songID
           createdAt
           updatedAt
-          songPostId
           __typename
         }
-        likes {
-          nextToken
-          __typename
-        }
-        comments {
-          nextToken
-          __typename
-        }
-        shares {
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
+        nextToken
+        scannedCount
+        count
         __typename
       }
       createdAt
       updatedAt
-      songPostId
       __typename
     }
   }
@@ -459,6 +462,17 @@ export const onCreateLike = /* GraphQL */ `
         videoUri
         description
         userID
+        user {
+          id
+          name
+          username
+          email
+          avatar
+          createdAt
+          updatedAt
+          __typename
+        }
+        songID
         song {
           id
           artist
@@ -467,43 +481,33 @@ export const onCreateLike = /* GraphQL */ `
           audioUri
           createdAt
           updatedAt
-          songPostId
           __typename
         }
         likes {
           nextToken
+          scannedCount
+          count
           __typename
         }
         comments {
           nextToken
+          scannedCount
+          count
           __typename
         }
         shares {
           nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
-        __typename
-      }
-      user {
-        id
-        name
-        userName
-        email
-        avatar
-        posts {
-          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
         __typename
       }
+      userID
       createdAt
       updatedAt
-      likeUserId
       __typename
     }
   }
@@ -518,6 +522,17 @@ export const onUpdateLike = /* GraphQL */ `
         videoUri
         description
         userID
+        user {
+          id
+          name
+          username
+          email
+          avatar
+          createdAt
+          updatedAt
+          __typename
+        }
+        songID
         song {
           id
           artist
@@ -526,43 +541,33 @@ export const onUpdateLike = /* GraphQL */ `
           audioUri
           createdAt
           updatedAt
-          songPostId
           __typename
         }
         likes {
           nextToken
+          scannedCount
+          count
           __typename
         }
         comments {
           nextToken
+          scannedCount
+          count
           __typename
         }
         shares {
           nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
-        __typename
-      }
-      user {
-        id
-        name
-        userName
-        email
-        avatar
-        posts {
-          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
         __typename
       }
+      userID
       createdAt
       updatedAt
-      likeUserId
       __typename
     }
   }
@@ -577,6 +582,17 @@ export const onDeleteLike = /* GraphQL */ `
         videoUri
         description
         userID
+        user {
+          id
+          name
+          username
+          email
+          avatar
+          createdAt
+          updatedAt
+          __typename
+        }
+        songID
         song {
           id
           artist
@@ -585,43 +601,33 @@ export const onDeleteLike = /* GraphQL */ `
           audioUri
           createdAt
           updatedAt
-          songPostId
           __typename
         }
         likes {
           nextToken
+          scannedCount
+          count
           __typename
         }
         comments {
           nextToken
+          scannedCount
+          count
           __typename
         }
         shares {
           nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
-        __typename
-      }
-      user {
-        id
-        name
-        userName
-        email
-        avatar
-        posts {
-          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
         __typename
       }
+      userID
       createdAt
       updatedAt
-      likeUserId
       __typename
     }
   }
@@ -637,6 +643,17 @@ export const onCreateComment = /* GraphQL */ `
         videoUri
         description
         userID
+        user {
+          id
+          name
+          username
+          email
+          avatar
+          createdAt
+          updatedAt
+          __typename
+        }
+        songID
         song {
           id
           artist
@@ -645,43 +662,33 @@ export const onCreateComment = /* GraphQL */ `
           audioUri
           createdAt
           updatedAt
-          songPostId
           __typename
         }
         likes {
           nextToken
+          scannedCount
+          count
           __typename
         }
         comments {
           nextToken
+          scannedCount
+          count
           __typename
         }
         shares {
           nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
-        __typename
-      }
-      user {
-        id
-        name
-        userName
-        email
-        avatar
-        posts {
-          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
         __typename
       }
+      userID
       createdAt
       updatedAt
-      commentUserId
       __typename
     }
   }
@@ -697,6 +704,17 @@ export const onUpdateComment = /* GraphQL */ `
         videoUri
         description
         userID
+        user {
+          id
+          name
+          username
+          email
+          avatar
+          createdAt
+          updatedAt
+          __typename
+        }
+        songID
         song {
           id
           artist
@@ -705,43 +723,33 @@ export const onUpdateComment = /* GraphQL */ `
           audioUri
           createdAt
           updatedAt
-          songPostId
           __typename
         }
         likes {
           nextToken
+          scannedCount
+          count
           __typename
         }
         comments {
           nextToken
+          scannedCount
+          count
           __typename
         }
         shares {
           nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
-        __typename
-      }
-      user {
-        id
-        name
-        userName
-        email
-        avatar
-        posts {
-          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
         __typename
       }
+      userID
       createdAt
       updatedAt
-      commentUserId
       __typename
     }
   }
@@ -757,6 +765,17 @@ export const onDeleteComment = /* GraphQL */ `
         videoUri
         description
         userID
+        user {
+          id
+          name
+          username
+          email
+          avatar
+          createdAt
+          updatedAt
+          __typename
+        }
+        songID
         song {
           id
           artist
@@ -765,43 +784,33 @@ export const onDeleteComment = /* GraphQL */ `
           audioUri
           createdAt
           updatedAt
-          songPostId
           __typename
         }
         likes {
           nextToken
+          scannedCount
+          count
           __typename
         }
         comments {
           nextToken
+          scannedCount
+          count
           __typename
         }
         shares {
           nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
-        __typename
-      }
-      user {
-        id
-        name
-        userName
-        email
-        avatar
-        posts {
-          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
         __typename
       }
+      userID
       createdAt
       updatedAt
-      commentUserId
       __typename
     }
   }
@@ -817,6 +826,17 @@ export const onCreateShare = /* GraphQL */ `
         videoUri
         description
         userID
+        user {
+          id
+          name
+          username
+          email
+          avatar
+          createdAt
+          updatedAt
+          __typename
+        }
+        songID
         song {
           id
           artist
@@ -825,43 +845,33 @@ export const onCreateShare = /* GraphQL */ `
           audioUri
           createdAt
           updatedAt
-          songPostId
           __typename
         }
         likes {
           nextToken
+          scannedCount
+          count
           __typename
         }
         comments {
           nextToken
+          scannedCount
+          count
           __typename
         }
         shares {
           nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
-        __typename
-      }
-      user {
-        id
-        name
-        userName
-        email
-        avatar
-        posts {
-          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
         __typename
       }
+      userID
       createdAt
       updatedAt
-      shareUserId
       __typename
     }
   }
@@ -877,6 +887,17 @@ export const onUpdateShare = /* GraphQL */ `
         videoUri
         description
         userID
+        user {
+          id
+          name
+          username
+          email
+          avatar
+          createdAt
+          updatedAt
+          __typename
+        }
+        songID
         song {
           id
           artist
@@ -885,43 +906,33 @@ export const onUpdateShare = /* GraphQL */ `
           audioUri
           createdAt
           updatedAt
-          songPostId
           __typename
         }
         likes {
           nextToken
+          scannedCount
+          count
           __typename
         }
         comments {
           nextToken
+          scannedCount
+          count
           __typename
         }
         shares {
           nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
-        __typename
-      }
-      user {
-        id
-        name
-        userName
-        email
-        avatar
-        posts {
-          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
         __typename
       }
+      userID
       createdAt
       updatedAt
-      shareUserId
       __typename
     }
   }
@@ -937,6 +948,17 @@ export const onDeleteShare = /* GraphQL */ `
         videoUri
         description
         userID
+        user {
+          id
+          name
+          username
+          email
+          avatar
+          createdAt
+          updatedAt
+          __typename
+        }
+        songID
         song {
           id
           artist
@@ -945,43 +967,33 @@ export const onDeleteShare = /* GraphQL */ `
           audioUri
           createdAt
           updatedAt
-          songPostId
           __typename
         }
         likes {
           nextToken
+          scannedCount
+          count
           __typename
         }
         comments {
           nextToken
+          scannedCount
+          count
           __typename
         }
         shares {
           nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        postSongId
-        __typename
-      }
-      user {
-        id
-        name
-        userName
-        email
-        avatar
-        posts {
-          nextToken
+          scannedCount
+          count
           __typename
         }
         createdAt
         updatedAt
         __typename
       }
+      userID
       createdAt
       updatedAt
-      shareUserId
       __typename
     }
   }

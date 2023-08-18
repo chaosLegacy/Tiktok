@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  textRowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   postContent: {
     marginBottom: 5,
   },
