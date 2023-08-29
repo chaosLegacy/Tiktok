@@ -4,6 +4,8 @@ import { AVPlaybackStatus, ResizeMode, Video } from 'expo-av';
 
 import styles from './styles';
 
+import { View } from '@/components/templates/Themed';
+
 type VideoPlayerProps = {
   videoUrl: string;
   videoRef: React.RefObject<Video>;
@@ -11,29 +13,19 @@ type VideoPlayerProps = {
     AVPlaybackStatus | undefined,
     React.Dispatch<React.SetStateAction<AVPlaybackStatus | undefined>>,
   ];
+  isLooping?: boolean;
+  shouldPlay?: boolean;
 };
-const VideoPlayer = ({ videoUrl, videoRef, videoStatus }: VideoPlayerProps) => {
+const VideoPlayer = ({
+  videoUrl,
+  videoRef,
+  videoStatus,
+  isLooping = true,
+  shouldPlay = false,
+}: VideoPlayerProps) => {
   const [, setStatus] = videoStatus;
-  // const { data: posterUrl } = useGetStorage(episode.poster, episode);
-  // const { data: videoUrl, loading: loadingVideo } = useGetStorage(
-  //   episode.video,
-  //   episode,
-  // );
-
-  // useEffect(() => {
-  //   if (!videoUrl) {
-  //     return;
-  //   }
-  //   (async () => {
-  //     await videoRef.current?.unloadAsync();
-  //     await videoRef.current?.loadAsync({ uri: videoUrl }, status, false);
-  //     // await videoRef.current?.playAsync();
-  //   })();
-  //   () => videoRef.current?.unloadAsync();
-  // }, [videoUrl]);
   return (
     <>
-      {/* <Skeleton show={loadingVideo}> */}
       {videoUrl ? (
         <Video
           ref={videoRef}
@@ -50,14 +42,15 @@ const VideoPlayer = ({ videoUrl, videoRef, videoStatus }: VideoPlayerProps) => {
           // usePoster={
           //   !status?.isLoaded || !status.isPlaying || status.didJustFinish
           // }
-          isLooping
+          isLooping={isLooping}
           useNativeControls={false}
-          shouldPlay={false}
+          shouldPlay={shouldPlay}
           resizeMode={ResizeMode.COVER}
           onPlaybackStatusUpdate={(status) => setStatus(status)}
         />
-      ) : null}
-      {/* </Skeleton> */}
+      ) : (
+        <View />
+      )}
     </>
   );
 };

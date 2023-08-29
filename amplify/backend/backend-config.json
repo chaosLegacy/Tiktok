@@ -89,5 +89,12 @@
         }
       ]
     }
+  },
+  "storage": {
+    "tiktokS3": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }

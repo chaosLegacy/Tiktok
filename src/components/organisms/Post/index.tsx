@@ -21,29 +21,28 @@ const PostComponent = ({ item }: PostProps) => {
   const currentVideoStatus = videoStatus[0];
 
   const onPlayPress = () => {
-    if (currentVideoStatus?.isLoaded) {
+    if (currentVideoStatus?.isLoaded && videoRef.current) {
       currentVideoStatus.isPlaying
-        ? videoRef.current!.pauseAsync()
-        : videoRef.current!.playAsync();
+        ? videoRef.current.pauseAsync()
+        : videoRef.current.playAsync();
     }
   };
   const handlePlaying = (isVisible: boolean) => {
-    isVisible ? videoRef.current!.playAsync() : videoRef.current!.pauseAsync();
+    if (!videoRef.current || !currentVideoStatus?.isLoaded) return false;
+    isVisible ? videoRef.current.playAsync() : videoRef.current.pauseAsync();
   };
   return (
-    <>
-      <VisibilitySensor onChange={handlePlaying}>
-        <TouchableHighlight onPress={onPlayPress} style={styles.container}>
-          <VideoPlayer
-            videoUrl={item.videoUri}
-            videoRef={videoRef}
-            videoStatus={videoStatus}
-          />
-        </TouchableHighlight>
-      </VisibilitySensor>
+    <VisibilitySensor onChange={handlePlaying}>
+      <TouchableHighlight onPress={onPlayPress} style={styles.container}>
+        <VideoPlayer
+          videoUrl={item.videoUri}
+          videoRef={videoRef}
+          videoStatus={videoStatus}
+        />
+      </TouchableHighlight>
       <VideoInteraction item={item} />
       <VideoDescription item={item} />
-    </>
+    </VisibilitySensor>
   );
 };
 

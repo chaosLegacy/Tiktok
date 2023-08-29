@@ -19,11 +19,14 @@
       "function": {
         "tiktok2e24242d2e24242dPostConfirmation": {
           "deploymentBucketName": "amplify-tiktok-dev-130716-deployment",
-          "s3Key": "amplify-builds/tiktok2e24242d2e24242dPostConfirmation-496b4963424557464835-build.zip"
+          "s3Key": "amplify-builds/tiktok2e24242d2e24242dPostConfirmation-67554876614471764949-build.zip"
         }
       },
       "api": {
         "tiktok": {}
+      },
+      "storage": {
+        "tiktokS3": {}
       }
     }
   }

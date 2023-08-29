@@ -1,5 +1,6 @@
 import { useColorScheme } from 'react-native';
 
+import 'react-native-get-random-values';
 import { Authenticator } from '@aws-amplify/ui-react-native';
 import {
   DarkTheme,

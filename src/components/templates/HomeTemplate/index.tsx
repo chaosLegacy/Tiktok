@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { useIsFocused } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 
 import { View } from '../Themed';
@@ -15,6 +16,7 @@ const HomeTemplate = () => {
   const { data, fetchMore } = useGePosts();
   const [posts, setPosts] = useState<Array<Post | null>>();
   const [nextToken, setNextToken] = useState<string | null>();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     setPosts(data?.listPosts?.items as Post[]);
@@ -31,7 +33,7 @@ const HomeTemplate = () => {
       } as Post[]);
     }
   };
-
+  if (!isFocused) return <View />;
   return (
     <View style={styles.container}>
       <FlashList
@@ -42,7 +44,7 @@ const HomeTemplate = () => {
         snapToInterval={layout.window.height - layout.TAB_OFFSET}
         snapToAlignment="start"
         decelerationRate="fast"
-        onEndReached={loadMorePosts}
+        // onEndReached={loadMorePosts}
       />
     </View>
   );

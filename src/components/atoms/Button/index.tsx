@@ -21,7 +21,7 @@ export type ButtonProps = {
   size?: 'small' | 'medium' | 'large' | 'larger';
   textColor?: string;
   rounded?: boolean;
-  childrenPosition?: 'none' | 'left' | 'right' | 'bottom';
+  childrenPosition?: 'none' | 'left' | 'right' | 'bottom' | 'center';
   childrenSpacing?: 'default' | 'none';
   loading?: boolean;
   backgroundColor?: string;
@@ -101,7 +101,7 @@ const layoutIconAndText = (
     );
   }
   if (childrenPosition === 'none' || !children) {
-    return textElem;
+    return <View style={{ alignItems: 'center' }}>{textElem}</View>;
   } else if (childrenPosition === 'left') {
     return (
       <View style={styles.flexRowCenter}>
@@ -118,6 +118,8 @@ const layoutIconAndText = (
         {textElem}
       </View>
     );
+  } else if (childrenPosition === 'center') {
+    return <View style={styles.flexColCenter}>{children}</View>;
   } else {
     return (
       <View style={styles.flexRowCenter}>

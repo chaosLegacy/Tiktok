@@ -41,7 +41,7 @@ const useGetUser = (currentUser?: boolean, id?: string) => {
   const queryData = async () => {
     try {
       setLoading(true);
-      if (!currentUser || !id) {
+      if (!currentUser && !id) {
         return undefined;
       }
       let userId;

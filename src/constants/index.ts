@@ -1,0 +1,3 @@
+const MAX_VIDEO_LENGTH = 10;
+
+export { MAX_VIDEO_LENGTH };

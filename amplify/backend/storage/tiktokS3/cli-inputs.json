@@ -1,0 +1,16 @@
+{
+  "resourceName": "tiktokS3",
+  "policyUUID": "634cf44e",
+  "bucketName": "tiktok-bucket",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

@@ -24,5 +24,11 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     }
+  },
+  "storage": {
+    "tiktokS3": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }
